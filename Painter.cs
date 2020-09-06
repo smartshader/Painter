@@ -13,7 +13,7 @@ namespace Painter
         private Texture2D _background;
         private Texture2D _balloon;
 
-        private Vector2 _balloonPosition;
+        private Vector2 _balloonPosition, _balloonOrigin;
 
         public Painter()
         {
@@ -46,8 +46,10 @@ namespace Painter
 
             // TODO: Add your update logic here
             MouseState currentMouseState = Mouse.GetState();
-            _balloonPosition = new Vector2(currentMouseState.X - _balloon.Width / 2,
-                currentMouseState.Y - _balloon.Height);
+            // _balloonPosition = new Vector2(currentMouseState.X - _balloon.Width / 2,
+            //     currentMouseState.Y - _balloon.Height);
+            _balloonOrigin = new Vector2(_balloon.Width / 2f, _balloon.Height);
+            _balloonPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
 
             base.Update(gameTime);
         }
@@ -59,7 +61,7 @@ namespace Painter
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
-            _spriteBatch.Draw(_balloon, _balloonPosition, Color.White);
+            _spriteBatch.Draw(_balloon, _balloonPosition - _balloonOrigin, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);
