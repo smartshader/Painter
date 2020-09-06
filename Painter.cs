@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Painter
 {
@@ -8,6 +9,9 @@ namespace Painter
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private Texture2D _background;
+        private Texture2D _balloon;
 
         public Painter()
         {
@@ -28,6 +32,9 @@ namespace Painter
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            _balloon = Content.Load<Texture2D>("spr_lives");
+            _background = Content.Load<Texture2D>("spr_background");
+            MediaPlayer.Play(Content.Load<Song>("snd_music"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -42,9 +49,13 @@ namespace Painter
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
+            _spriteBatch.Draw(_balloon, Vector2.Zero, Color.White);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
