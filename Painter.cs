@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Painter
 {
-    public class Game1 : Game
+    public class Painter : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public Game1()
+        public Painter()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
