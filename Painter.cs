@@ -18,6 +18,8 @@ namespace Painter
         private Texture2D _balloonMiddleScreen;
         private Texture2D _balloonTopRight;
         private Texture2D _balloonBottomLeft;
+        private const int BalloonMiddleScreenRadius = 50;
+        private const float BalloonMiddleScreenSpeed = 1.0f;
         private Vector2 _balloonMiddleScreenPosition;
         private Vector2 _balloonTopRightPosition;
         private Vector2 _balloonBottomLeftPosition;
@@ -74,9 +76,15 @@ namespace Painter
             _barrelAngle = (float) Math.Atan2(currentMouseState.Y - _cannonBarrelPosition.Y,
                 currentMouseState.X - _cannonBarrelPosition.X);
             
-            _balloonMiddleScreenPosition = new Vector2(_windowWidth / 2f, _windowHeigth / 2f);
+            _balloonMiddleScreenPosition = new Vector2(
+                _windowWidth / 2f + BalloonMiddleScreenRadius *
+                    (float) Math.Cos((gameTime.TotalGameTime.Milliseconds * BalloonMiddleScreenSpeed / 1000f) * 2 * Math.PI),
+                _windowHeigth / 2f + BalloonMiddleScreenRadius *
+                    (float) Math.Sin((gameTime.TotalGameTime.Milliseconds * BalloonMiddleScreenSpeed / 1000f) * 2 * Math.PI));
+            
             _balloonTopRightPosition = new Vector2(
                 _windowWidth - _balloonTopRight.Width, gameTime.TotalGameTime.Milliseconds / 1000f * _windowHeigth);
+            
             _balloonBottomLeftPosition = new Vector2(
                 gameTime.TotalGameTime.Milliseconds / 1000f * _windowWidth, _windowHeigth - _balloonBottomLeft.Height);
 
